@@ -18,6 +18,21 @@
 
 	<!-- Example code -->
 	<script type="text/javascript">
+		var gGraph = null;
+		function hello()
+		{
+			alert ("Called Hello");
+			var graph = gGraph;
+			graph.getModel().beginUpdate();
+			var parent = graph.getDefaultParent();
+			try 
+			{
+			graph.insertVertex(parent, null, 'NewVertex', 60, 60, 80, 30);
+			}
+			finally {
+			graph.getModel().endUpdate();
+			}
+		}
 		// Program starts here. Creates a sample graph in the
 		// DOM node with the specified ID. This function is invoked
 		// from the onLoad event handler of the document (see below).
@@ -89,7 +104,7 @@
 				// Creates the graph inside the given container
 				var graph = new mxGraph(container);
 				graph.setTolerance(20);
-
+				gGraph = graph;
 				// Gets the default parent for inserting new cells. This
 				// is normally the first child of the root (ie. layer 0).
 				var parent = graph.getDefaultParent();
@@ -120,5 +135,6 @@
 	<div id="graphContainer"
 		style="overflow:hidden;width:641px;height:481px;background:url('editors/images/grid.gif');cursor:default;">
 	</div>
+	<div onclick="javascript: hello()">Btn1</div>
 </body>
 </html>
